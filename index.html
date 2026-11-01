@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>دروس الباكالوريا – حصص مسجلة وملخصات PDF</title>
+  <meta name="description" content="دروس الباكالوريا المغربية مرتبة حسب المادة والدرس، مع ملخصات وتمارين PDF للتحميل.">
+
+  <!-- للتجربة السريعة فقط. في الإنتاج: ثبّت Tailwind عبر CLI لتحصل على ملف CSS صغير جداً -->
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['"IBM Plex Sans Arabic"', 'Tahoma', 'system-ui', 'sans-serif'] },
+          colors: { ink: '#0F1B2D', paper: '#F7F9FC', line: '#E3E9EF', brand: '#0B7A75' }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* ورق مسطّر بالمربعات: هوية بصرية خفيفة بدون صور */
+    .grid-paper {
+      background-image:
+        linear-gradient(#E3E9EF 1px, transparent 1px),
+        linear-gradient(90deg, #E3E9EF 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .subj[aria-expanded="true"] { border-color: #0B7A75; box-shadow: inset 0 0 0 1px #0B7A75; color: #0B7A75; }
+    :focus-visible { outline: 3px solid #0B7A75; outline-offset: 2px; }
+  </style>
+</head>
+
+<body class="bg-paper text-ink font-sans antialiased">
+
+  <!-- الترويسة -->
+  <header class="sticky top-0 z-20 bg-white/95 border-b border-line">
+    <nav class="max-w-5xl mx-auto flex items-center justify-between px-4 h-14" aria-label="التنقل الرئيسي">
+      <a href="/" class="font-bold text-lg">دروس<span class="text-brand">Bac</span></a>
+      <ul class="flex gap-5 text-sm font-semibold">
+        <li><a class="hover:text-brand" href="/courses">الدروس</a></li>
+        <li><a class="hover:text-brand" href="/pdf">ملفات PDF</a></li>
+        <li><a class="hover:text-brand" href="/contact">تواصل</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <!-- البطل: أقصر طريق إلى الدرس -->
+    <section class="grid-paper border-b border-line">
+      <div class="max-w-5xl mx-auto px-4 py-12 sm:py-16">
+        <h1 class="text-3xl sm:text-5xl font-bold leading-tight max-w-2xl">
+          دروس الباكالوريا، مادة بعد مادة
+        </h1>
+        <p class="mt-4 text-base sm:text-lg text-ink/75 max-w-xl leading-8">
+          حصص مباشرة مسجلة، وملخصات وتمارين PDF. ابحث عن الدرس الذي تحتاجه وابدأ فوراً.
+        </p>
+
+        <form action="/search" class="mt-8 flex max-w-xl bg-white border border-line rounded-xl overflow-hidden shadow-sm" role="search">
+          <label for="q" class="sr-only">ابحث عن درس</label>
+          <input id="q" name="q" type="search" placeholder="مثال: النهايات، الأعداد العقدية…"
+                 class="flex-1 px-4 py-3 outline-none bg-transparent">
+          <button class="bg-brand text-white font-semibold px-5 hover:opacity-90">بحث</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- اختيار المادة -->
+    <section class="max-w-5xl mx-auto px-4 pt-10" aria-labelledby="subjects">
+      <h2 id="subjects" class="text-xl font-bold mb-4">اختر المادة</h2>
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+        <a href="/courses/math" data-subject="math" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">الرياضيات</span>
+        </a>
+        <a href="/courses/pc" data-subject="pc" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">الفيزياء والكيمياء</span>
+        </a>
+        <a href="/courses/svt" data-subject="svt" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">علوم الحياة والأرض</span>
+        </a>
+        <a href="/courses/eco" data-subject="eco" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">الاقتصاد العام والإحصاء</span>
+        </a>
+        <a href="/courses/phil" data-subject="phil" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">الفلسفة</span>
+        </a>
+        <a href="/courses/fr" data-subject="fr" aria-expanded="false" aria-controls="teachers" class="subj block bg-white border border-line rounded-lg p-4 hover:border-brand">
+          <span class="font-semibold">اللغة الفرنسية</span>
+        </a>
+      </div>
+
+      <!-- أساتذة المادة المختارة -->
+      <div id="teachers" class="mt-4" hidden aria-live="polite">
+        <h3 id="teachers-title" class="font-bold mb-3"></h3>
+        <div id="teachers-list" class="flex flex-wrap gap-2"></div>
+      </div>
+
+      <!-- فيديوهات الأستاذ المختار -->
+      <div id="teacher-videos" class="mt-8" hidden aria-live="polite">
+        <h3 id="teacher-videos-title" class="font-bold mb-3"></h3>
+        <div id="teacher-videos-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+      </div>
+    </section>
+
+    <!-- أحدث الدروس: يوتيوب بتحميل كسول -->
+    <section class="max-w-5xl mx-auto px-4 py-10" aria-labelledby="latest">
+      <div class="flex items-baseline justify-between mb-4">
+        <h2 id="latest" class="text-xl font-bold">أحدث الدروس</h2>
+        <a href="/courses" class="text-sm font-semibold text-brand">كل الدروس</a>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- استبدل data-id بمعرّف الفيديو من يوتيوب -->
+        <article class="bg-white border border-line rounded-lg overflow-hidden">
+          <button class="yt relative block w-full aspect-video bg-ink/90 group" data-id="VIDEO_ID_1" aria-label="تشغيل: النهايات والاتصال">
+            <span class="absolute inset-0 flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#0B7A75" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </span>
+          </button>
+          <div class="p-4">
+            <h3 class="font-semibold">النهايات والاتصال</h3>
+            <p class="text-sm text-ink/65 mt-1">الرياضيات · 1 س 20 د</p>
+            <a href="/pdf/limits.pdf" class="inline-block mt-3 text-sm font-semibold text-brand" download>تحميل الملخص (PDF)</a>
+          </div>
+        </article>
+
+        <article class="bg-white border border-line rounded-lg overflow-hidden">
+          <button class="yt relative block w-full aspect-video bg-ink/90" data-id="VIDEO_ID_2" aria-label="تشغيل: الحركة المستقيمية">
+            <span class="absolute inset-0 flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#0B7A75" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </span>
+          </button>
+          <div class="p-4">
+            <h3 class="font-semibold">الحركة المستقيمية</h3>
+            <p class="text-sm text-ink/65 mt-1">الفيزياء والكيمياء · 1 س 05 د</p>
+            <a href="/pdf/complex.pdf" class="inline-block mt-3 text-sm font-semibold text-brand" download>تحميل الملخص (PDF)</a>
+          </div>
+        </article>
+
+        <article class="bg-white border border-line rounded-lg overflow-hidden">
+          <button class="yt relative block w-full aspect-video bg-ink/90" data-id="VIDEO_ID_3" aria-label="تشغيل: الوراثة">
+            <span class="absolute inset-0 flex items-center justify-center">
+              <span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="#0B7A75" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+              </span>
+            </span>
+          </button>
+          <div class="p-4">
+            <h3 class="font-semibold">الوراثة</h3>
+            <p class="text-sm text-ink/65 mt-1">علوم الحياة والأرض · 55 د</p>
+            <a href="/pdf/probability.pdf" class="inline-block mt-3 text-sm font-semibold text-brand" download>تحميل الملخص (PDF)</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ملفات PDF -->
+    <section class="border-t border-line bg-white">
+      <div class="max-w-5xl mx-auto px-4 py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h2 class="text-xl font-bold">ملخصات وتمارين PDF</h2>
+          <p class="text-ink/70 mt-1">مرتبة حسب المادة والدرس، وجاهزة للطباعة.</p>
+        </div>
+        <a href="/pdf" class="inline-block text-center bg-ink text-white font-semibold px-6 py-3 rounded-lg hover:opacity-90">
+          تصفح الملفات
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="max-w-5xl mx-auto px-4 py-8 text-sm text-ink/60">
+    © <span id="y"></span> دروس Bac · <a class="underline" href="/contact">تواصل معنا</a>
+  </footer>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+
+    // أسماء الأساتذة لكل مادة (بيانات تجريبية: عدّلها بأسماء أساتذتك وروابطهم)
+    var TEACHERS = {
+      math: [['الأستاذ 1', 'prof-1'], ['الأستاذ 2', 'prof-2']],
+      pc:   [['الأستاذ 3', 'prof-3'], ['الأستاذ 4', 'prof-4']],
+      svt:  [['الأستاذ 5', 'prof-5']],
+      eco:  [['الأستاذ 6', 'prof-6']],
+      phil: [['الأستاذ 7', 'prof-7']],
+      fr:   [['الأستاذ 8', 'prof-8']]
+    };
+    var panel = document.getElementById('teachers'),
+        title = document.getElementById('teachers-title'),
+        list = document.getElementById('teachers-list'),
+        subjects = document.querySelectorAll('.subj');
+
+    subjects.forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        var key = a.dataset.subject, open = a.getAttribute('aria-expanded') === 'true';
+        subjects.forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
+        if (open) { panel.hidden = true; vpanel.hidden = true; return; }
+        a.setAttribute('aria-expanded', 'true');
+        title.textContent = 'اختر أستاذ ' + a.textContent.trim();
+        list.innerHTML = '';
+        vpanel.hidden = true;
+        (TEACHERS[key] || []).forEach(function (t) {
+          var l = document.createElement('a');
+          l.href = '/courses/' + key + '/' + t[1];
+          l.textContent = t[0];
+          l.className = 'teacher bg-ink text-white font-semibold px-4 py-2 rounded-lg hover:opacity-90 aria-pressed:bg-brand';
+          l.setAttribute('aria-pressed', 'false');
+          l.addEventListener('click', function (ev) {
+            ev.preventDefault();
+            list.querySelectorAll('.teacher').forEach(function (x) { x.setAttribute('aria-pressed', 'false'); });
+            l.setAttribute('aria-pressed', 'true');
+            showVideos(t[1], t[0]);
+          });
+          list.appendChild(l);
+        });
+        panel.hidden = false;
+        panel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      });
+    });
+
+
+    // فيديوهات كل أستاذ (بيانات تجريبية: عدّلها). id = معرّف فيديو يوتيوب، pdf اختياري
+    var VIDEOS = {
+      'prof-1': [
+        { id: 'VIDEO_ID_1', title: 'النهايات والاتصال', dur: '1 س 20 د', pdf: '/pdf/limits.pdf' },
+        { id: 'VIDEO_ID_2', title: 'الاشتقاق', dur: '1 س 10 د', pdf: '/pdf/derivation.pdf' }
+      ],
+      'prof-2': [
+        { id: 'VIDEO_ID_3', title: 'الأعداد العقدية', dur: '1 س 05 د' }
+      ]
+    };
+    var vpanel = document.getElementById('teacher-videos'),
+        vtitle = document.getElementById('teacher-videos-title'),
+        vgrid = document.getElementById('teacher-videos-grid');
+
+    // يوتيوب بتحميل كسول: لا يُحمَّل المشغّل (≈ 1MB) إلا عند الضغط
+    function mountYT(btn) {
+      var id = btn.dataset.id;
+      btn.style.backgroundImage = 'url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg)';
+      btn.style.backgroundSize = 'cover';
+      btn.style.backgroundPosition = 'center';
+      btn.addEventListener('click', function () {
+        var f = document.createElement('iframe');
+        f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+        f.title = btn.getAttribute('aria-label');
+        f.allow = 'autoplay; encrypted-media; picture-in-picture';
+        f.allowFullscreen = true;
+        f.className = 'absolute inset-0 w-full h-full';
+        var box = document.createElement('div');
+        box.className = 'relative w-full aspect-video';
+        box.appendChild(f);
+        btn.replaceWith(box);
+      }, { once: true });
+    }
+    document.querySelectorAll('.yt').forEach(mountYT);
+
+    function buildCard(v) {
+      var card = document.createElement('article');
+      card.className = 'bg-white border border-line rounded-lg overflow-hidden';
+      var btn = document.createElement('button');
+      btn.className = 'yt relative block w-full aspect-video bg-ink/90';
+      btn.dataset.id = v.id;
+      btn.setAttribute('aria-label', 'تشغيل: ' + v.title);
+      btn.innerHTML = '<span class="absolute inset-0 flex items-center justify-center"><span class="w-14 h-14 rounded-full bg-white/95 flex items-center justify-center"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0B7A75" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg></span></span>';
+      var body = document.createElement('div');
+      body.className = 'p-4';
+      var h = document.createElement('h3');
+      h.className = 'font-semibold';
+      h.textContent = v.title;
+      var m = document.createElement('p');
+      m.className = 'text-sm text-ink/65 mt-1';
+      m.textContent = v.dur;
+      body.appendChild(h);
+      body.appendChild(m);
+      if (v.pdf) {
+        var a = document.createElement('a');
+        a.href = v.pdf;
+        a.download = '';
+        a.className = 'inline-block mt-3 text-sm font-semibold text-brand';
+        a.textContent = 'تحميل الملخص (PDF)';
+        body.appendChild(a);
+      }
+      card.appendChild(btn);
+      card.appendChild(body);
+      mountYT(btn);
+      return card;
+    }
+
+    function showVideos(slug, name) {
+      var items = VIDEOS[slug] || [];
+      vtitle.textContent = 'فيديوهات ' + name;
+      vgrid.innerHTML = '';
+      if (!items.length) {
+        var p = document.createElement('p');
+        p.className = 'text-ink/65';
+        p.textContent = 'لا توجد فيديوهات منشورة لهذا الأستاذ بعد.';
+        vgrid.appendChild(p);
+      }
+      items.forEach(function (v) { vgrid.appendChild(buildCard(v)); });
+      vpanel.hidden = false;
+      vpanel.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
